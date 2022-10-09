@@ -7,73 +7,80 @@ import {
   ViroARSceneNavigator,
   ViroBox,
   ViroButton,
+  Viro360Image,
+  Viro3DObject,
+  ViroARTrackingTargets,
+  ViroARImageMarker,
+  ViroMaterials,
 } from '@viro-community/react-viro';
 
 const HelloWorldSceneAR = () => {
-  const [text, setText] = useState('Initializing AR...');
+  const [showOpt, setShowOpt] = useState(false);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [z, setZ] = useState(0);
+  const [materials, setMaterials] = useState(['homeless']);
 
-  const [scence, setScence] = useState('');
+  ViroARTrackingTargets.createTargets({
+    homeless: {
+      source: require('./asset/homeless.png'),
+      orietntation: 'Up',
+      physicalWidth: 0.165,
+    },
+  });
 
-  function onInitialized(state, reason) {
-    console.log('guncelleme', state, reason);
-    // if (state === ViroConstants.TRACKING_NORMAL) {
-    setText('Hello World!');
-    // } else if (state === ViroConstants.TRACKING_NONE) {
-    //   // Handle loss of tracking
-    // }
-  }
+  ViroMaterials.createMaterials({
+    homeless: {
+      diffuseTexture: require('./asset/homeless.png'),
+    },
+    detail: {
+      diffuseTexture: require('./asset/detail-button.png'),
+    },
+    shelter: {
+      diffuseTexture: require('./asset/shelter.png'),
+    },
+  });
+
+  const clickHandler = (position, source) => {
+    setX(position[0]);
+    setY(position[1]);
+    setZ(position[2]);
+    setShowOpt(true);
+    setMaterials(['shelter']);
+  };
+
   return (
-    <ViroARScene onTrackingUpdated={onInitialized}>
-      <ViroButton
-        source={require('./asset/homeless.png')}
-        position={[1, 0, -3]}
-        height={0.5}
-        width={1}
-        onClick={() => {
-          setScence('homeless');
-        }}
-      />
-      {scence == 'homeless' && (
-        <ViroText
-          text={'We suggestion shelter'}
-          position={[1, 0.5, -3]}
-          style={{color: 'red'}}
-        />
-      )}
-      <ViroButton
-        source={require('./asset/refugees.png')}
-        position={[0, 0, -3]}
-        height={0.5}
-        width={1}
-        onTap={this._onButtonTap}
-        onClick={() => {
-          setScence('refugees');
-        }}
-      />
-      {scence == 'refugees' && (
-        <ViroText
-          text={'We suggestion refugee action'}
-          position={[0, 0.5, -3]}
-          style={{color: 'red'}}
-        />
-      )}
-      <ViroButton
-        source={require('./asset/orphan.png')}
-        position={[-1, 0, -3]}
-        height={0.5}
-        width={1}
-        onTap={this._onButtonTap}
-        onClick={() => {
-          setScence('orphan');
-        }}
-      />
-      {scence == 'orphan' && (
-        <ViroText
-          text={'We suggestion Orphans in Need'}
-          position={[-1, 0.5, -3]}
-          style={{color: 'red'}}
-        />
-      )}
+    <ViroARScene>
+      <ViroARImageMarker target="homeless">
+        <>
+          <ViroBox
+            height={2}
+            length={2}
+            width={2}
+            scale={[0.05, 0.05, 0.05]}
+            materials={materials}
+            onClick={clickHandler}
+          />
+          {showOpt && (
+            <>
+              <ViroButton
+                source={require('./asset/donate-button.png')}
+                position={[x + 0.15, y + 0.5, z]}
+                height={0.1}
+                width={0.2}
+                onTap={this._onButtonTap}
+              />
+              <ViroButton
+                source={require('./asset/detail-button.png')}
+                position={[x - 0.15, y + 0.5, z]}
+                height={0.1}
+                width={0.2}
+                onTap={this._onButtonTap}
+              />
+            </>
+          )}
+        </>
+      </ViroARImageMarker>
     </ViroARScene>
   );
 };
@@ -100,3 +107,47 @@ var styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+{
+  /*
+<ViroButton
+  source={require('./asset/refugees.png')}
+  position={[0, 0, -3]}
+  height={0.5}
+  width={1}
+  onTap={this._onButtonTap}
+  onClick={() => {
+    setScence('refugees');
+  }}
+/>;
+{
+  scence == 'refugees' && (
+    <ViroText
+      text={'We suggestion refugee action'}
+      position={[0, 0.5, -3]}
+      style={{color: 'red'}}
+    />
+  );
+}
+<ViroButton
+  source={require('./asset/orphan.png')}
+  position={[-1, 0, -3]}
+  height={0.5}
+  width={1}
+  onTap={this._onButtonTap}
+  onClick={() => {
+    setScence('orphan');
+  }}
+/>;
+{
+  scence == 'orphan' && (
+    <ViroText
+      text={'We suggestion Orphans in Need'}
+      position={[-1, 0.5, -3]}
+      style={{color: 'red'}}
+    />
+  );
+}
+
+*/
+}
