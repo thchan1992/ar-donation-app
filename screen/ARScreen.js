@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {
   ViroARScene,
-  ViroText,
   ViroARSceneNavigator,
-  ViroBox,
-  ViroButton,
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroMaterials,
-  ViroARCamera,
 } from '@viro-community/react-viro';
 import ARButton from '../component/ARButton';
 import ARBox from '../component/ARBox';
+import {tracking} from '../util/arTrackingTarget';
+import {boxMaterials} from '../util/boxMaterials';
 
 const ARScreen = ({navigation}) => {
   const ARScene = () => {
@@ -23,45 +21,9 @@ const ARScreen = ({navigation}) => {
     const [homelessMaterials, setHomeMaterials] = useState(['homeless']);
     const [orphansMaterials, setOrphansMaterials] = useState(['orphan']);
     const [reMaterials, setReMaterials] = useState(['refugee']);
-    // const [showHomeDet, setShowHomeDet] = useState(false);
     const [scene, setScene] = useState(0);
-
-    ViroARTrackingTargets.createTargets({
-      homeless: {
-        source: require('../asset/homeless.png'),
-        orietntation: 'Up',
-        physicalWidth: 0.165,
-      },
-      orphan: {
-        source: require('../asset/orphan.png'),
-        orietntation: 'Up',
-        physicalWidth: 0.165,
-      },
-      refugee: {
-        source: require('../asset/refugees.png'),
-        orietntation: 'Up',
-        physicalWidth: 0.165,
-      },
-    });
-
-    ViroMaterials.createMaterials({
-      homeless: {
-        diffuseTexture: require('../asset/homeless.png'),
-      },
-      detail: {
-        diffuseTexture: require('../asset/detail-button.png'),
-      },
-      shelter: {
-        diffuseTexture: require('../asset/shelter.png'),
-      },
-      orphan: {diffuseTexture: require('../asset/orphan.png')},
-      orphansInNeed: {
-        diffuseTexture: require('../asset/orphans-in-need.png'),
-      },
-      refugee: {diffuseTexture: require('../asset/refugees.png')},
-      redCross: {diffuseTexture: require('../asset/redCross.jpeg')},
-      textBackground: {diffuseTexture: require('../asset/background.png')},
-    });
+    tracking;
+    boxMaterials;
 
     const clickHomelessHandler = (position, source) => {
       setScene(1);
@@ -195,3 +157,40 @@ export default ARScreen;
 // const [x_re, setX_re] = useState(0);
 // const [y_re, setY_re] = useState(0);
 // const [z_re, setZ_re] = useState(0);
+
+// ViroARTrackingTargets.createTargets({
+//   homeless: {
+//     source: require('../asset/homeless.png'),
+//     orietntation: 'Up',
+//     physicalWidth: 0.165,
+//   },
+//   orphan: {
+//     source: require('../asset/orphan.png'),
+//     orietntation: 'Up',
+//     physicalWidth: 0.165,
+//   },
+//   refugee: {
+//     source: require('../asset/refugees.png'),
+//     orietntation: 'Up',
+//     physicalWidth: 0.165,
+//   },
+// });
+
+// ViroMaterials.createMaterials({
+//   homeless: {
+//     diffuseTexture: require('../asset/homeless.png'),
+//   },
+//   detail: {
+//     diffuseTexture: require('../asset/detail-button.png'),
+//   },
+//   shelter: {
+//     diffuseTexture: require('../asset/shelter.png'),
+//   },
+//   orphan: {diffuseTexture: require('../asset/orphan.png')},
+//   orphansInNeed: {
+//     diffuseTexture: require('../asset/orphans-in-need.png'),
+//   },
+//   refugee: {diffuseTexture: require('../asset/refugees.png')},
+//   redCross: {diffuseTexture: require('../asset/redCross.jpeg')},
+//   textBackground: {diffuseTexture: require('../asset/background.png')},
+// });
