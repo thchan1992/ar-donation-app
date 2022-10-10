@@ -14,7 +14,7 @@ import {
   ViroMaterials,
   ViroARCamera,
 } from '@viro-community/react-viro';
-import {StateContext} from './context';
+
 const AR = ({navigation}) => {
   const HelloWorldSceneAR = () => {
     const [showHomeOpt, setShowHomeOpt] = useState(false);
@@ -33,7 +33,7 @@ const AR = ({navigation}) => {
     const [orphansMaterials, setOrphansMaterials] = useState(['orphan']);
     const [reMaterials, setReMaterials] = useState(['refugee']);
     const [showHomeDet, setShowHomeDet] = useState(false);
-    const ctx = useContext(StateContext);
+
     ViroARTrackingTargets.createTargets({
       homeless: {
         source: require('./asset/homeless.png'),
