@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useState, useContext, useEffect} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, Modal} from 'react-native';
 import {
   ViroARScene,
   ViroText,
@@ -12,7 +12,10 @@ import {
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroMaterials,
+  ViroARCamera,
 } from '@viro-community/react-viro';
+import {StateContext} from './context';
+import StateContextProvider from './context';
 
 const HelloWorldSceneAR = () => {
   const [showHomeOpt, setShowHomeOpt] = useState(false);
@@ -30,7 +33,8 @@ const HelloWorldSceneAR = () => {
   const [homelessMaterials, setHomeMaterials] = useState(['homeless']);
   const [orphansMaterials, setOrphansMaterials] = useState(['orphan']);
   const [reMaterials, setReMaterials] = useState(['refugee']);
-
+  const [showHomeDet, setShowHomeDet] = useState(false);
+  const ctx = useContext(StateContext);
   ViroARTrackingTargets.createTargets({
     homeless: {
       source: require('./asset/homeless.png'),
@@ -65,6 +69,7 @@ const HelloWorldSceneAR = () => {
     },
     refugee: {diffuseTexture: require('./asset/refugees.png')},
     redCross: {diffuseTexture: require('./asset/redCross.jpeg')},
+    textBackground: {diffuseTexture: require('./asset/background.png')},
   });
 
   const clickHomelessHandler = (position, source) => {
@@ -107,34 +112,80 @@ const HelloWorldSceneAR = () => {
     <ViroARScene>
       <ViroARImageMarker target="homeless">
         <>
-          <ViroBox
-            height={2}
-            length={2}
-            width={2}
-            scale={[0.05, 0.05, 0.05]}
-            materials={homelessMaterials}
-            onClick={clickHomelessHandler}
-          />
-          {showHomeOpt && (
+          {!showHomeDet && (
+            <ViroBox
+              height={2}
+              length={2}
+              width={2}
+              scale={[0.05, 0.05, 0.05]}
+              materials={homelessMaterials}
+              onClick={clickHomelessHandler}
+            />
+          )}
+          {showHomeOpt && !showHomeDet && (
             <>
               <ViroButton
                 source={require('./asset/donate-button.png')}
-                position={[x_home + 0.15, y_home + 0.5, z_home]}
+                position={[x_home, y_home + 0.3, z_home]}
                 height={0.1}
                 width={0.2}
                 onTap={this._onButtonTap}
               />
               <ViroButton
                 source={require('./asset/detail-button.png')}
-                position={[x_home - 0.15, y_home + 0.5, z_home]}
+                position={[x_home, y_home + 0.5, z_home]}
                 height={0.1}
                 width={0.2}
                 onTap={this._onButtonTap}
+                onClick={() => {
+                  setShowHomeDet(true);
+                  ctx.detail();
+                }}
               />
             </>
           )}
         </>
       </ViroARImageMarker>
+      {showHomeDet && (
+        <ViroARCamera>
+          <ViroButton
+            source={require('./asset/back-button.png')}
+            position={[0, 3, -6.1]}
+            height={0.5}
+            width={1}
+            onTap={this._onButtonTap}
+            onClick={() => {
+              setShowHomeDet(false);
+              setShowHomeOpt(true);
+            }}
+          />
+          <ViroText
+            position={[0, 0, -6]}
+            text={
+              'Shelter is a registered charity that campaigns for tenant rights in Great Britain. \n\nIt gives advice, information and advocacy to people and lobbyies government and local authorities for new laws and policies. \n\nIt works in partnership with Shelter Cymru in Wales and the Housing Rights Service in Northern Ireland.'
+            }
+            width={2}
+            height={2}
+            style={{
+              fontFamily: 'Arial',
+              fontSize: 13,
+              fontWeight: 'bold',
+              color: '#0000FF',
+            }}
+            textAlign="center"
+          />
+          <ViroButton
+            source={require('./asset/background.png')}
+            position={[0, 0, -6.2]}
+            height={5}
+            width={2.5}
+            onTap={this._onButtonTap}
+            onClick={() => {
+              setShowHomeDet(true);
+            }}
+          />
+        </ViroARCamera>
+      )}
       <ViroARImageMarker target="orphan">
         <>
           <ViroBox
@@ -200,68 +251,33 @@ const HelloWorldSceneAR = () => {
 };
 
 export default () => {
+  const ctx = useContext(StateContext);
+
+  useEffect;
   return (
-    <ViroARSceneNavigator
-      autofocus={true}
-      initialScene={{
-        scene: HelloWorldSceneAR,
-      }}
-      style={styles.f1}
-    />
+    <StateContextProvider>
+      <View style={{flex: 1}}>
+        <ViroARSceneNavigator
+          autofocus={true}
+          initialScene={{
+            scene: HelloWorldSceneAR,
+          }}
+          style={styles.f1}
+        />
+        {ctx.showDetail && <View style={styles.controlsView}></View>}
+      </View>
+    </StateContextProvider>
   );
 };
 
 var styles = StyleSheet.create({
   f1: {flex: 1},
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
+  controlsView: {
+    width: '100%',
+    height: 100,
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
-
-{
-  /*
-<ViroButton
-  source={require('./asset/refugees.png')}
-  position={[0, 0, -3]}
-  height={0.5}
-  width={1}
-  onTap={this._onButtonTap}
-  onClick={() => {
-    setScence('refugees');
-  }}
-/>;
-{
-  scence == 'refugees' && (
-    <ViroText
-      text={'We suggestion refugee action'}
-      position={[0, 0.5, -3]}
-      style={{color: 'red'}}
-    />
-  );
-}
-<ViroButton
-  source={require('./asset/orphan.png')}
-  position={[-1, 0, -3]}
-  height={0.5}
-  width={1}
-  onTap={this._onButtonTap}
-  onClick={() => {
-    setScence('orphan');
-  }}
-/>;
-{
-  scence == 'orphan' && (
-    <ViroText
-      text={'We suggestion Orphans in Need'}
-      position={[-1, 0.5, -3]}
-      style={{color: 'red'}}
-    />
-  );
-}
-
-*/
-}
