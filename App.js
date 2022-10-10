@@ -5,6 +5,7 @@ import DonationScreen from './DonationScreen';
 import AR from './AR';
 import PaymentScreen from './PaymentScreen';
 import ReceiptScreen from './ReceiptScreen';
+import DetailScreen from './DetailScreen';
 const Stack = createNativeStackNavigator();
 
 export default () => {
@@ -15,6 +16,7 @@ export default () => {
         <Stack.Screen name="donate" component={DonationScreen} />
         <Stack.Screen name="payment" component={PaymentScreen} />
         <Stack.Screen name="ReceiptScreen" component={ReceiptScreen} />
+        <Stack.Screen name="DetailScreen" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

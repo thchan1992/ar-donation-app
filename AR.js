@@ -1,14 +1,11 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Modal} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
   ViroARSceneNavigator,
   ViroBox,
   ViroButton,
-  Viro360Image,
-  Viro3DObject,
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroMaterials,
@@ -32,7 +29,8 @@ const AR = ({navigation}) => {
     const [homelessMaterials, setHomeMaterials] = useState(['homeless']);
     const [orphansMaterials, setOrphansMaterials] = useState(['orphan']);
     const [reMaterials, setReMaterials] = useState(['refugee']);
-    const [showHomeDet, setShowHomeDet] = useState(false);
+    // const [showHomeDet, setShowHomeDet] = useState(false);
+    const [scene, setScene] = useState(0);
 
     ViroARTrackingTargets.createTargets({
       homeless: {
@@ -72,36 +70,30 @@ const AR = ({navigation}) => {
     });
 
     const clickHomelessHandler = (position, source) => {
+      setScene(1);
       setX_home(position[0]);
       setY_home(position[1]);
       setZ_home(position[2]);
-      setShowHomeOpt(true);
-      setShowOrphansOpt(false);
-      setShowReOpt(false);
       setHomeMaterials(['shelter']);
       setOrphansMaterials(['orphan']);
       setReMaterials(['refugee']);
     };
 
     const clickOrphansHandler = (position, source) => {
+      setScene(2);
       setX_or(position[0]);
       setY_or(position[1]);
       setZ_or(position[2]);
-      setShowHomeOpt(false);
-      setShowOrphansOpt(true);
-      setShowReOpt(false);
       setHomeMaterials(['homeless']);
       setOrphansMaterials(['orphansInNeed']);
       setReMaterials(['refugee']);
     };
 
     const clickReHandler = (position, source) => {
+      setScene(3);
       setX_re(position[0]);
       setY_re(position[1]);
       setZ_re(position[2]);
-      setShowHomeOpt(false);
-      setShowOrphansOpt(false);
-      setShowReOpt(true);
       setHomeMaterials(['homeless']);
       setOrphansMaterials(['orphan']);
       setReMaterials(['redCross']);
@@ -111,17 +103,15 @@ const AR = ({navigation}) => {
       <ViroARScene>
         <ViroARImageMarker target="homeless">
           <>
-            {!showHomeDet && (
-              <ViroBox
-                height={2}
-                length={2}
-                width={2}
-                scale={[0.05, 0.05, 0.05]}
-                materials={homelessMaterials}
-                onClick={clickHomelessHandler}
-              />
-            )}
-            {showHomeOpt && !showHomeDet && (
+            <ViroBox
+              height={2}
+              length={2}
+              width={2}
+              scale={[0.05, 0.05, 0.05]}
+              materials={homelessMaterials}
+              onClick={clickHomelessHandler}
+            />
+            {scene == 1 && (
               <>
                 <ViroButton
                   source={require('./asset/donate-button.png')}
@@ -142,53 +132,13 @@ const AR = ({navigation}) => {
                   width={0.2}
                   onTap={this._onButtonTap}
                   onClick={() => {
-                    setShowHomeDet(true);
+                    navigation.navigate('DetailScreen', {detail: 'detail'});
                   }}
                 />
               </>
             )}
           </>
         </ViroARImageMarker>
-        {showHomeDet && (
-          <ViroARCamera>
-            <ViroButton
-              source={require('./asset/back-button.png')}
-              position={[0, 3, -6.1]}
-              height={0.5}
-              width={1}
-              onTap={this._onButtonTap}
-              onClick={() => {
-                setShowHomeDet(false);
-                setShowHomeOpt(true);
-              }}
-            />
-            <ViroText
-              position={[0, 0, -6]}
-              text={
-                'Shelter is a registered charity that campaigns for tenant rights in Great Britain. \n\nIt gives advice, information and advocacy to people and lobbyies government and local authorities for new laws and policies. \n\nIt works in partnership with Shelter Cymru in Wales and the Housing Rights Service in Northern Ireland.'
-              }
-              width={2}
-              height={2}
-              style={{
-                fontFamily: 'Arial',
-                fontSize: 13,
-                fontWeight: 'bold',
-                color: '#0000FF',
-              }}
-              textAlign="center"
-            />
-            <ViroButton
-              source={require('./asset/background.png')}
-              position={[0, 0, -6.2]}
-              height={5}
-              width={2.5}
-              onTap={this._onButtonTap}
-              onClick={() => {
-                setShowHomeDet(true);
-              }}
-            />
-          </ViroARCamera>
-        )}
         <ViroARImageMarker target="orphan">
           <>
             <ViroBox
@@ -199,7 +149,7 @@ const AR = ({navigation}) => {
               materials={orphansMaterials}
               onClick={clickOrphansHandler}
             />
-            {showOrphansOpt && (
+            {scene == 2 && (
               <>
                 <ViroButton
                   source={require('./asset/donate-button.png')}
@@ -229,7 +179,7 @@ const AR = ({navigation}) => {
               materials={reMaterials}
               onClick={clickReHandler}
             />
-            {showReOpt && (
+            {scene == 3 && (
               <>
                 <ViroButton
                   source={require('./asset/donate-button.png')}
