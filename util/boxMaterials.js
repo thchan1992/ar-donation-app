@@ -1,6 +1,6 @@
 import {ViroMaterials} from '@viro-community/react-viro';
 
-export const boxMaterial = ViroMaterials.createMaterials({
+export const boxMaterials = ViroMaterials.createMaterials({
   homeless: {
     diffuseTexture: require('../asset/homeless.png'),
   },
