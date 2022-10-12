@@ -11,6 +11,7 @@ import ARButton from '../component/ARButton';
 import ARBox from '../component/ARBox';
 import {tracking} from '../util/arTrackingTarget';
 import {boxMaterials} from '../util/boxMaterials';
+import {selectedCharity} from '../data/charityData';
 
 const ARScreen = ({navigation}) => {
   const ARScene = () => {
@@ -67,16 +68,16 @@ const ARScreen = ({navigation}) => {
               <>
                 <ARButton
                   position={[x_home, y_home + 0.3, z_home]}
-                  buttonPic={require('../asset/donate-button.png')}
+                  buttonPic={require('../assets/donate-button.png')}
                   navDest={'donate'}
-                  paramObj={{charityName: 'shelter'}}
+                  paramObj={{charity: selectedCharity('homeless')}}
                   navigation={navigation}
                 />
                 <ARButton
                   position={[x_home, y_home + 0.5, z_home]}
-                  buttonPic={require('../asset/detail-button.png')}
+                  buttonPic={require('../assets/detail-button.png')}
                   navDest={'DetailScreen'}
-                  paramObj={{detail: 'homeless'}}
+                  paramObj={{charity: selectedCharity('homeless')}}
                   navigation={navigation}
                 />
               </>
@@ -93,16 +94,16 @@ const ARScreen = ({navigation}) => {
               <>
                 <ARButton
                   position={[x_home, y_home + 0.3, z_home]}
-                  buttonPic={require('../asset/donate-button.png')}
+                  buttonPic={require('../assets/donate-button.png')}
                   navDest={'donate'}
-                  paramObj={{charityName: 'orphansInNeed'}}
+                  paramObj={{charity: selectedCharity('orphan')}}
                   navigation={navigation}
                 />
                 <ARButton
                   position={[x_home, y_home + 0.5, z_home]}
-                  buttonPic={require('../asset/detail-button.png')}
+                  buttonPic={require('../assets/detail-button.png')}
                   navDest={'DetailScreen'}
-                  paramObj={{detail: 'orphans'}}
+                  paramObj={{charity: selectedCharity('orphan')}}
                   navigation={navigation}
                 />
               </>
@@ -116,16 +117,16 @@ const ARScreen = ({navigation}) => {
               <>
                 <ARButton
                   position={[x_home, y_home + 0.3, z_home]}
-                  buttonPic={require('../asset/donate-button.png')}
+                  buttonPic={require('../assets/donate-button.png')}
                   navDest={'donate'}
-                  paramObj={{charityName: 'red cross'}}
+                  paramObj={{charity: selectedCharity('refugee')}}
                   navigation={navigation}
                 />
                 <ARButton
                   position={[x_home, y_home + 0.5, z_home]}
-                  buttonPic={require('../asset/detail-button.png')}
+                  buttonPic={require('../assets/detail-button.png')}
                   navDest={'DetailScreen'}
-                  paramObj={{detail: 'refugee'}}
+                  paramObj={{charity: selectedCharity('refugee')}}
                   navigation={navigation}
                 />
               </>

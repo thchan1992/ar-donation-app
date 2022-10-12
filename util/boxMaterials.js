@@ -2,19 +2,19 @@ import {ViroMaterials} from '@viro-community/react-viro';
 
 export const boxMaterials = ViroMaterials.createMaterials({
   homeless: {
-    diffuseTexture: require('../asset/homeless.png'),
+    diffuseTexture: require('../assets/homeless.png'),
   },
   detail: {
-    diffuseTexture: require('../asset/detail-button.png'),
+    diffuseTexture: require('../assets/detail-button.png'),
   },
   shelter: {
-    diffuseTexture: require('../asset/shelter.png'),
+    diffuseTexture: require('../assets/shelter.png'),
   },
-  orphan: {diffuseTexture: require('../asset/orphan.png')},
+  orphan: {diffuseTexture: require('../assets/orphan.png')},
   orphansInNeed: {
-    diffuseTexture: require('../asset/orphans-in-need.png'),
+    diffuseTexture: require('../assets/orphans-in-need.png'),
   },
-  refugee: {diffuseTexture: require('../asset/refugees.png')},
-  redCross: {diffuseTexture: require('../asset/redCross.jpeg')},
-  textBackground: {diffuseTexture: require('../asset/background.png')},
+  refugee: {diffuseTexture: require('../assets/refugees.png')},
+  redCross: {diffuseTexture: require('../assets/redCross.jpeg')},
+  textBackground: {diffuseTexture: require('../assets/background.png')},
 });
