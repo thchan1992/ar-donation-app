@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DonationScreen from './screen/DonationScreen';
 import ARScreen from './screen/ARScreen';
-import PaymentScreen from './screen/PaymentScreen';
+import CardPaymentScreen from './screen/CardPaymentScreen';
 import ReceiptScreen from './screen/ReceiptScreen';
 import DetailScreen from './screen/DetailScreen';
 const Stack = createNativeStackNavigator();
@@ -18,7 +18,7 @@ export default () => {
           options={{headerShown: false}}
         />
         <Stack.Screen name="donate" component={DonationScreen} />
-        <Stack.Screen name="payment" component={PaymentScreen} />
+        <Stack.Screen name="payment" component={CardPaymentScreen} />
         <Stack.Screen name="ReceiptScreen" component={ReceiptScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
       </Stack.Navigator>
