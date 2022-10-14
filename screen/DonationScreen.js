@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useContext, useEffect} from 'react';
 import NumberInput from '../component/NumberInput';
@@ -52,15 +53,17 @@ const DonationScreen = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={charity.imageUrl} />
-      <Text>How much would you like to donate to {charity.name}?</Text>
-      <View style={styles.inputContainer}>
-        <NumberInput
-          value={donateAmount}
-          setter={setDonateAmount}
-          placeholder={'Donation Amount'}
-        />
-        <PrimaryButton text={'Donate'} onPress={handleSubmit} />
-      </View>
+      <ScrollView>
+        <Text>How much would you like to donate to {charity.name}?</Text>
+        <View style={styles.inputContainer}>
+          <NumberInput
+            value={donateAmount}
+            setter={setDonateAmount}
+            placeholder={'Donation Amount'}
+          />
+          <PrimaryButton text={'Donate'} onPress={handleSubmit} />
+        </View>
+      </ScrollView>
     </View>
   );
 };
