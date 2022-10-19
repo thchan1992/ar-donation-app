@@ -7,8 +7,8 @@ const ARButton = ({position, buttonPic, navDest, paramObj, navigation}) => {
     <ViroButton
       source={buttonPic}
       position={position}
-      height={0.1}
-      width={0.2}
+      height={0.5}
+      width={0.5}
       onClick={() => {
         navigation.navigate(navDest, paramObj);
       }}

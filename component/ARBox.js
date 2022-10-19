@@ -1,15 +1,16 @@
 import React from 'react';
 import {ViroBox} from '@viro-community/react-viro';
 
-const ARBox = ({clickHandler, materials}) => {
+const ARBox = ({clickHandler, materials, position}) => {
   return (
     <ViroBox
-      height={2}
-      length={2}
-      width={2}
-      scale={[0.05, 0.05, 0.05]}
+      height={1}
+      length={1}
+      width={1}
+      scale={[0.5, 0.5, 0.5]}
       materials={materials}
       onClick={clickHandler}
+      position={position}
     />
   );
 };

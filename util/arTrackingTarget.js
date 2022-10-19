@@ -4,7 +4,7 @@ export const tracking = ViroARTrackingTargets.createTargets({
   homeless: {
     source: require('../assets/homeless.png'),
     orietntation: 'Up',
-    physicalWidth: 0.165,
+    physicalWidth: 0.1,
   },
   orphan: {
     source: require('../assets/orphan.png'),
