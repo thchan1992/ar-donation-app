@@ -10,7 +10,7 @@ export const boxMaterials = ViroMaterials.createMaterials({
   shelter: {
     diffuseTexture: require('../assets/shelter.png'),
   },
-  orphan: {diffuseTexture: require('../assets/orphan.png')},
+  orphans: {diffuseTexture: require('../assets/orphan.png')},
   orphansInNeed: {
     diffuseTexture: require('../assets/orphans-in-need.png'),
   },

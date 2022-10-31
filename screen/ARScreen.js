@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {View} from 'react-native';
 import {
   ViroARScene,
@@ -12,96 +12,152 @@ import ARButton from '../component/ARButton';
 import ARBox from '../component/ARBox';
 import {tracking} from '../util/arTrackingTarget';
 import {boxMaterials} from '../util/boxMaterials';
-import {selectedCharity} from '../data/charityData';
+import {
+  charityList,
+  selectedCharity,
+  beneficiaryList,
+} from '../data/charityData';
 import AROption from '../component/AROption';
 
 const ARScreen = ({navigation}) => {
   const ARScene = () => {
-    const [showCharityOne, setShowCharityOne] = useState(false);
-    const [showCharityTwo, setShowCharityTwo] = useState(false);
-    const [showCharityThree, setShowCharityThree] = useState(false);
-    // const [x_home, setX_home] = useState(0);
-    // const [y_home, setY_home] = useState(0);
-    // const [z_home, setZ_home] = useState(0);
+    const [beneList, setBeneList] = useState([]);
+    const [showCharity, setShowCharity] = useState([]);
+    const [charityOpt, setCharityOpt] = useState([]);
+    const [showButton, setShowButton] = useState([]);
 
-    // const [homelessMaterials, setHomeMaterials] = useState(['homeless']);
-    // const [orphansMaterials, setOrphansMaterials] = useState(['orphan']);
-    // const [reMaterials, setReMaterials] = useState(['refugee']);
-    // const [scene, setScene] = useState(0);
+    useEffect(() => {
+      var lowEnd = -6;
+      var highEnd = 0;
+      var yVal = [];
+      while (lowEnd <= highEnd) {
+        yVal.push((lowEnd += 3));
+      }
+      const result = [];
+      const result2 = [];
+      const result3 = [];
+      const result4 = [];
+
+      beneficiaryList.map((obj, index) => {
+        result.push({
+          beneficiary: obj,
+          y: yVal[index],
+        });
+        result2.push(false);
+        result3.push(
+          charityList.filter(char => {
+            // char.show = false;
+
+            return char.beneficiary == obj;
+          }),
+        );
+        const arr = [];
+        charityList.map(char => {
+          if (char.beneficiary == obj) {
+            arr.push(false);
+          }
+        });
+        result4.push(arr);
+      });
+
+      setShowButton(result4);
+      setCharityOpt(result3);
+      setBeneList(result);
+      setShowCharity(result2);
+    }, []);
     tracking;
     boxMaterials;
 
-    // const clickHomelessHandler = (position, source) => {
-    //   setScene(1);
-    //   setX_home(position[0]);
-    //   setY_home(position[1]);
-    //   setZ_home(position[2]);
-    //   setHomeMaterials(['shelter']);
-    //   setOrphansMaterials(['orphan']);
-    //   setReMaterials(['refugee']);
-    // };
+    const showCharHandler = i => {
+      setShowCharity(prev => {
+        const newState = prev.map(obj => {
+          obj = false;
+        });
+        return newState;
+      });
 
-    // const clickOrphansHandler = (position, source) => {
-    //   setScene(2);
-    //   setX_home(position[0]);
-    //   setY_home(position[1]);
-    //   setZ_home(position[2]);
-    //   setHomeMaterials(['homeless']);
-    //   setOrphansMaterials(['orphansInNeed']);
-    //   setReMaterials(['refugee']);
-    // };
+      setShowCharity(prev => {
+        const newState = [...prev];
+        newState[i] = true;
+        return newState;
+      });
+    };
 
-    // const clickReHandler = (position, source) => {
-    //   setScene(3);
-    //   setX_home(position[0]);
-    //   setY_home(position[1]);
-    //   setZ_home(position[2]);
-    //   setHomeMaterials(['homeless']);
-    //   setOrphansMaterials(['orphan']);
-    //   setReMaterials(['redCross']);
-    // };
+    const showOptHandler = (i, index) => {
+      setShowButton(prev => {
+        const result = [];
+        beneficiaryList.map(obj => {
+          const arr = [];
+          charityList.map(char => {
+            if (char.beneficiary == obj) {
+              arr.push(false);
+            }
+          });
+          result.push(arr);
+        });
+        return result;
+      });
 
+      setShowButton(prev => {
+        const newState = [...prev];
+        newState[i][index] = true;
+        return newState;
+      });
+    };
     return (
       <ViroARScene>
-        <AROption
-          beneMaterial={'homeless'}
-          x={0}
-          y={0}
-          z={-4}
-          charityMaterial={'shelter'}
-          navigation={navigation}
-          selectedCharity={selectedCharity('homeless')}
-          showChar={showCharityOne}
-          clickHandler={() => {
-            setShowCharityOne(true);
-          }}
-        />
-        <AROption
-          beneMaterial={'orphan'}
-          x={0}
-          y={3}
-          z={-4}
-          charityMaterial={'orphansInNeed'}
-          navigation={navigation}
-          selectedCharity={selectedCharity('orphan')}
-          showChar={showCharityTwo}
-          clickHandler={() => {
-            setShowCharityTwo(true);
-          }}
-        />
-        <AROption
-          beneMaterial={'refugee'}
-          x={0}
-          y={-3}
-          z={-4}
-          charityMaterial={'redCross'}
-          navigation={navigation}
-          selectedCharity={selectedCharity('refugee')}
-          showChar={showCharityThree}
-          clickHandler={() => {
-            setShowCharityThree(true);
-          }}
-        />
+        {beneList.map((obj, i) => {
+          return (
+            <>
+              <ARBox
+                key={obj.beneficiary}
+                clickHandler={() => {
+                  showCharHandler(i);
+                }}
+                materials={obj.beneficiary}
+                position={[0, obj.y, -4]}
+              />
+              {showCharity[i] === true && (
+                <>
+                  {charityOpt[i].map((char, index) => {
+                    return (
+                      <>
+                        <ARBox
+                          key={char.name}
+                          clickHandler={() => {
+                            showOptHandler(i, index);
+                          }}
+                          materials={char.beneficiary}
+                          position={[index - 1, obj.y + 1, -4]}
+                        />
+                        {showButton[i][index] === true && (
+                          <>
+                            <ARButton
+                              position={[index - 1.5, obj.y + 2, -4]}
+                              buttonPic={require('../assets/donate-button.png')}
+                              navDest={'donate'}
+                              paramObj={{charity: charityOpt[i][index]}}
+                              navigation={navigation}
+                            />
+                            <ARButton
+                              position={[index - 0.5, obj.y + 2, -4]}
+                              buttonPic={require('../assets/detail-button.png')}
+                              navDest={'DetailScreen'}
+                              paramObj={{
+                                charity: charityOpt[i][index],
+                              }}
+                              navigation={navigation}
+                            />
+                          </>
+                        )}
+                      </>
+                    );
+                  })}
+                </>
+              )}
+            </>
+          );
+        })}
       </ViroARScene>
     );
   };
@@ -121,98 +177,18 @@ const ARScreen = ({navigation}) => {
 
 export default ARScreen;
 
-// <ViroBox height={1} length={1} width={1} position={[-2, 0, -6]} />
-//         <ARButton
-//           position={[-2, 2, -6]}
-//           buttonPic={require('../assets/donate-button.png')}
-//           navDest={'donate'}
-//           paramObj={{charity: selectedCharity('homeless')}}
-//           navigation={navigation}
-//         />
-//         <ARButton
-//           position={[-2, 4, -6]}
-//           buttonPic={require('../assets/detail-button.png')}
-//           navDest={'DetailScreen'}
-//           paramObj={{charity: selectedCharity('homeless')}}
-//           navigation={navigation}
-//         />
-
-//         <ViroBox height={1} length={1} width={1} position={[0, 0, -6]} />
-
-//         <ViroBox height={1} length={1} width={1} position={[2, 0, -6]} />
-
-//         <ViroARImageMarker target="homeless">
-//           <>
-//             <ARBox
-//               clickHandler={clickHomelessHandler}
-//               materials={homelessMaterials}
-//             />
-//             {scene == 1 && (
-//               <>
-//                 <ARButton
-//                   position={[x_home, y_home + 0.3, z_home]}
-//                   buttonPic={require('../assets/donate-button.png')}
-//                   navDest={'donate'}
-//                   paramObj={{charity: selectedCharity('homeless')}}
-//                   navigation={navigation}
-//                 />
-//                 <ARButton
-//                   position={[x_home, y_home + 0.5, z_home]}
-//                   buttonPic={require('../assets/detail-button.png')}
-//                   navDest={'DetailScreen'}
-//                   paramObj={{charity: selectedCharity('homeless')}}
-//                   navigation={navigation}
-//                 />
-//               </>
-//             )}
-//           </>
-//         </ViroARImageMarker>
-//         <ViroARImageMarker target="orphan">
-//           <>
-//             <ARBox
-//               clickHandler={clickOrphansHandler}
-//               materials={orphansMaterials}
-//             />
-//             {scene == 2 && (
-//               <>
-//                 <ARButton
-//                   position={[x_home, y_home + 0.3, z_home]}
-//                   buttonPic={require('../assets/donate-button.png')}
-//                   navDest={'donate'}
-//                   paramObj={{charity: selectedCharity('orphan')}}
-//                   navigation={navigation}
-//                 />
-//                 <ARButton
-//                   position={[x_home, y_home + 0.5, z_home]}
-//                   buttonPic={require('../assets/detail-button.png')}
-//                   navDest={'DetailScreen'}
-//                   paramObj={{charity: selectedCharity('orphan')}}
-//                   navigation={navigation}
-//                 />
-//               </>
-//             )}
-//           </>
-//         </ViroARImageMarker>
-//         <ViroARImageMarker target="refugee">
-//           <>
-//             <ARBox clickHandler={clickReHandler} materials={reMaterials} />
-//             {scene == 3 && (
-//               <>
-//                 <ARButton
-//                   position={[x_home, y_home + 0.3, z_home]}
-//                   buttonPic={require('../assets/donate-button.png')}
-//                   navDest={'donate'}
-//                   paramObj={{charity: selectedCharity('refugee')}}
-//                   navigation={navigation}
-//                 />
-//                 <ARButton
-//                   position={[x_home, y_home + 0.5, z_home]}
-//                   buttonPic={require('../assets/detail-button.png')}
-//                   navDest={'DetailScreen'}
-//                   paramObj={{charity: selectedCharity('refugee')}}
-//                   navigation={navigation}
-//                 />
-//               </>
-//             )}
-//           </>
-//         </ViroARImageMarker>
+//  <AROption
+//    key={obj.alias}
+//    beneMaterial={obj.beneficiary}
+//    x={0}
+//    y={obj.y}
+//    z={-4}
+//    charityMaterial={obj.alias}
+//    navigation={null}
+//    selectedCharity={null}
+//    showCharity={null}
+//    clickHandler={() => {
+//      // setShowCharityOne(true);
+//      console.log('pressed');
+//    }}
+//  />;
