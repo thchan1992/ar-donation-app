@@ -1,23 +1,15 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {
   ViroARScene,
   ViroARSceneNavigator,
-  ViroARTrackingTargets,
-  ViroARImageMarker,
-  ViroMaterials,
-  ViroBox,
+  Viro360Image,
 } from '@viro-community/react-viro';
 import ARButton from '../component/ARButton';
 import ARBox from '../component/ARBox';
 import {tracking} from '../util/arTrackingTarget';
 import {boxMaterials} from '../util/boxMaterials';
-import {
-  charityList,
-  selectedCharity,
-  beneficiaryList,
-} from '../data/charityData';
-import AROption from '../component/AROption';
+import {charityList, beneficiaryList} from '../data/charityData';
 
 const ARScreen = ({navigation}) => {
   const ARScene = () => {
@@ -27,11 +19,11 @@ const ARScreen = ({navigation}) => {
     const [showButton, setShowButton] = useState([]);
 
     useEffect(() => {
-      var lowEnd = -6;
+      var lowEnd = -4;
       var highEnd = 0;
       var yVal = [];
       while (lowEnd <= highEnd) {
-        yVal.push((lowEnd += 3));
+        yVal.push((lowEnd += 2));
       }
       const result = [];
       const result2 = [];
@@ -46,8 +38,6 @@ const ARScreen = ({navigation}) => {
         result2.push(false);
         result3.push(
           charityList.filter(char => {
-            // char.show = false;
-
             return char.beneficiary == obj;
           }),
         );
@@ -60,9 +50,10 @@ const ARScreen = ({navigation}) => {
         result4.push(arr);
       });
 
+      setBeneList(result);
       setShowButton(result4);
       setCharityOpt(result3);
-      setBeneList(result);
+
       setShowCharity(result2);
     }, []);
     tracking;
@@ -75,7 +66,6 @@ const ARScreen = ({navigation}) => {
         });
         return newState;
       });
-
       setShowCharity(prev => {
         const newState = [...prev];
         newState[i] = true;
@@ -97,18 +87,19 @@ const ARScreen = ({navigation}) => {
         });
         return result;
       });
-
       setShowButton(prev => {
         const newState = [...prev];
         newState[i][index] = true;
         return newState;
       });
     };
+
     return (
       <ViroARScene>
         {beneList.map((obj, i) => {
           return (
             <>
+              <Viro360Image source={require('../assets/background.png')} />
               <ARBox
                 key={obj.beneficiary}
                 clickHandler={() => {
@@ -128,19 +119,19 @@ const ARScreen = ({navigation}) => {
                             showOptHandler(i, index);
                           }}
                           materials={char.beneficiary}
-                          position={[index - 1, obj.y + 1, -4]}
+                          position={[index - 1, obj.y + 0.7, -4]}
                         />
                         {showButton[i][index] === true && (
                           <>
                             <ARButton
-                              position={[index - 1.5, obj.y + 2, -4]}
+                              position={[index - 1.5, obj.y + 1.2, -4]}
                               buttonPic={require('../assets/donate-button.png')}
                               navDest={'donate'}
                               paramObj={{charity: charityOpt[i][index]}}
                               navigation={navigation}
                             />
                             <ARButton
-                              position={[index - 0.5, obj.y + 2, -4]}
+                              position={[index - 0.5, obj.y + 1.2, -4]}
                               buttonPic={require('../assets/detail-button.png')}
                               navDest={'DetailScreen'}
                               paramObj={{
@@ -176,19 +167,3 @@ const ARScreen = ({navigation}) => {
 };
 
 export default ARScreen;
-
-//  <AROption
-//    key={obj.alias}
-//    beneMaterial={obj.beneficiary}
-//    x={0}
-//    y={obj.y}
-//    z={-4}
-//    charityMaterial={obj.alias}
-//    navigation={null}
-//    selectedCharity={null}
-//    showCharity={null}
-//    clickHandler={() => {
-//      // setShowCharityOne(true);
-//      console.log('pressed');
-//    }}
-//  />;
