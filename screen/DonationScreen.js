@@ -10,6 +10,8 @@ import {
 import React, {useState, useContext, useEffect} from 'react';
 import NumberInput from '../component/NumberInput';
 import PrimaryButton from '../component/PrimaryButton';
+import {instrucText} from '../util/styling';
+import {image} from '../util/styling';
 
 const DonationScreen = ({navigation, route}) => {
   // const [amount, setAmount] = useState(null);
@@ -52,14 +54,21 @@ const DonationScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={charity.imageUrl} />
+      <Image style={image.image} source={charity.imageUrl} />
       <ScrollView>
-        <Text>How much would you like to donate to {charity.name}?</Text>
+        <Text style={instrucText.instrucText}>
+          How much would you like to donate to {charity.name}?
+        </Text>
         <View style={styles.inputContainer}>
           <NumberInput
             value={donateAmount}
             setter={setDonateAmount}
-            placeholder={'Donation Amount'}
+            placeholder={'Amount'}
+            height={40}
+            maxWidth={160}
+            minWidth={160}
+            maxLength={5}
+            isPound={true}
           />
           <PrimaryButton text={'Donate'} onPress={handleSubmit} />
         </View>
@@ -71,9 +80,9 @@ const DonationScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 10,
   },
   input: {
     height: 40,
