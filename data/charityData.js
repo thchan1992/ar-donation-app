@@ -1,8 +1,23 @@
+export const homeless = {
+  beneficiary: 'homeless',
+  imageUrl: require('../assets/homeless.png'),
+};
+
+export const refugee = {
+  beneficiary: 'refugee',
+  imageUrl: require('../assets/refugees.png'),
+};
+
+export const orphans = {
+  beneficiary: 'orphans',
+  imageUrl: require('../assets/orphan.png'),
+};
+
 export const shelter = {
   name: 'shelter',
   info: 'Shelter is a registered charity that campaigns for tenant rights in Great Britain. It gives advice, information and advocacy to people and lobbyies government and local authorities for new laws and policies. It works in partnership with Shelter Cymru in Wales and the Housing Rights Service in Northern Ireland.',
   imageUrl: require('../assets/shelter.png'),
-  beneficiary: 'homeless',
+  beneficiary: homeless,
   alias: 'shelter',
 };
 
@@ -10,7 +25,7 @@ export const redCross = {
   name: 'red cross',
   info: 'The British Red Cross Society is the United Kingdom body of the worldwide neutral and impartial humanitarian network the International Red Cross and Red Crescent Movement. The society was formed in 1870, and is a registered charity with more than 17,200 volunteers and 3,400 staff. At the heart of their work is providing help to people in crisis, both in the UK and overseas. ',
   imageUrl: require('../assets/redCross.jpeg'),
-  beneficiary: 'refugee',
+  beneficiary: refugee,
   alias: 'red cross',
 };
 
@@ -18,17 +33,11 @@ export const orphansInNeed = {
   name: 'orphans in need',
   info: 'Orphans in Need is a British charity dedicated to improving and empowering the lives of vulnerable orphans and widows. A UK based organisation, they operate throughout the world supporting 12,000 orphans in 14 countries. In 2015, Orphans in Need won the British Muslim Awards Muslim Charity of the Year Award for its work in the field of humanitarian relief. This was recognised at a gala event in Birmingham.',
   imageUrl: require('../assets/orphans-in-need.png'),
-  beneficiary: 'orphans',
+  beneficiary: orphans,
   alias: 'orphans in need',
 };
 
-export const homeless = 'homeless';
-
-export const refugee = 'refugee';
-
-export const orphans = 'orphans';
-
-export const beneficiaryList = [homeless, refugee, orphans];
+// export const beneficiaryList = [homeless, refugee, orphans];
 
 export const selectedCharity = opt => {
   let selection = {};
@@ -46,4 +55,16 @@ export const selectedCharity = opt => {
   return selection;
 };
 
-export const charityList = [shelter, shelter, redCross, orphansInNeed];
+export const charityList = [shelter, redCross, orphansInNeed];
+
+export const beneficiaryList = () => {
+  const result = [];
+  charityList.map(charity => {
+    const checkBene = obj =>
+      obj.beneficiary === charity.beneficiary.beneficiary;
+    if (!result.some(checkBene)) {
+      result.push(charity.beneficiary);
+    }
+  });
+  return result;
+};
