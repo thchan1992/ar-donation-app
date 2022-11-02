@@ -6,21 +6,45 @@ import ARScreen from './screen/ARScreen';
 import CardPaymentScreen from './screen/CardPaymentScreen';
 import ReceiptScreen from './screen/ReceiptScreen';
 import DetailScreen from './screen/DetailScreen';
+import {headerColor, bgColor} from './util/styling';
 const Stack = createNativeStackNavigator();
 
 export default () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: headerColor,
+          },
+          headerTintColor: 'white',
+          contentStyle: {backgroundColor: bgColor},
+        }}>
         <Stack.Screen
           name="AR"
           component={ARScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="donate" component={DonationScreen} />
-        <Stack.Screen name="payment" component={CardPaymentScreen} />
-        <Stack.Screen name="ReceiptScreen" component={ReceiptScreen} />
-        <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen
+          name="donate"
+          options={{title: ''}}
+          component={DonationScreen}
+        />
+        <Stack.Screen
+          name="payment"
+          options={{title: ''}}
+          component={CardPaymentScreen}
+        />
+        <Stack.Screen
+          name="ReceiptScreen"
+          options={{title: ''}}
+          component={ReceiptScreen}
+        />
+        <Stack.Screen
+          name="DetailScreen"
+          options={{title: ''}}
+          component={DetailScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
