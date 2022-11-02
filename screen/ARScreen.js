@@ -30,31 +30,33 @@ const ARScreen = ({navigation}) => {
       const result3 = [];
       const result4 = [];
 
-      beneficiaryList.map((obj, index) => {
+      beneficiaryList().map((obj, index) => {
         result.push({
-          beneficiary: obj,
+          beneficiary: obj.beneficiary,
           y: yVal[index],
         });
         result2.push(false);
         result3.push(
           charityList.filter(char => {
-            return char.beneficiary == obj;
+            return char.beneficiary.beneficiary == obj.beneficiary;
           }),
         );
         const arr = [];
         charityList.map(char => {
-          if (char.beneficiary == obj) {
+          if (char.beneficiary.beneficiary == obj.beneficiary) {
             arr.push(false);
           }
         });
         result4.push(arr);
       });
-
+      //bene list
       setBeneList(result);
-      setShowButton(result4);
-      setCharityOpt(result3);
-
+      //whether show charity or not
       setShowCharity(result2);
+      // charity opt list
+      setCharityOpt(result3);
+      // whether show the button or not
+      setShowButton(result4);
     }, []);
     tracking;
     boxMaterials;
@@ -76,10 +78,10 @@ const ARScreen = ({navigation}) => {
     const showOptHandler = (i, index) => {
       setShowButton(prev => {
         const result = [];
-        beneficiaryList.map(obj => {
+        beneficiaryList().map(obj => {
           const arr = [];
           charityList.map(char => {
-            if (char.beneficiary == obj) {
+            if (char.beneficiary.beneficiary == obj.beneficiary) {
               arr.push(false);
             }
           });
@@ -118,7 +120,7 @@ const ARScreen = ({navigation}) => {
                           clickHandler={() => {
                             showOptHandler(i, index);
                           }}
-                          materials={char.beneficiary}
+                          materials={char.name}
                           position={[index - 1, obj.y + 0.7, -4]}
                         />
                         {showButton[i][index] === true && (
