@@ -8,7 +8,7 @@ const ARButton = ({position, buttonPic, navDest, paramObj, navigation}) => {
       source={buttonPic}
       position={position}
       height={0.5}
-      width={0.5}
+      width={0.7}
       onClick={() => {
         navigation.navigate(navDest, paramObj);
       }}
