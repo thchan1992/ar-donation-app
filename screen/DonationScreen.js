@@ -12,36 +12,9 @@ import NumberInput from '../component/NumberInput';
 import PrimaryButton from '../component/PrimaryButton';
 import {instrucText} from '../util/styling';
 import {image} from '../util/styling';
+import {getAmountScreenMsg} from '../constants/msg';
 
 const DonationScreen = ({navigation, route}) => {
-  // const [amount, setAmount] = useState(null);
-
-  // useEffect(() => {
-  //   console.log(route.params.charity);
-  // }, []);
-
-  // const handleSubmit = () => {
-  //   navigation.navigate('payment', {
-  //     charity: route.params.charity,
-  //     donateAmount: amount,
-  //   });
-  // };
-
-  // return (
-  //   <View>
-  //     <Text>Donation Organisation: {route.params.charity.name}</Text>
-  //     <TextInput
-  //       placeholder="0.00"
-  //       keyboardType={'numeric'}
-  //       value={amount}
-  //       onChangeText={setAmount}
-  //     />
-  //     <TouchableOpacity onPress={handleSubmit}>
-  //       <Text>Confirm</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
-
   const [donateAmount, setDonateAmount] = useState(null);
   const {charity} = route.params;
 
@@ -53,11 +26,12 @@ const DonationScreen = ({navigation, route}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image style={image.image} source={charity.imageUrl} />
-      <ScrollView>
+    <ScrollView>
+      <View style={styles.container}>
+        <Image style={image.image} source={charity.imageUrl} />
+
         <Text style={instrucText.instrucText}>
-          How much would you like to donate to {charity.name}?
+          {getAmountScreenMsg(charity.name)}
         </Text>
         <View style={styles.inputContainer}>
           <NumberInput
@@ -72,8 +46,8 @@ const DonationScreen = ({navigation, route}) => {
           />
           <PrimaryButton text={'Donate'} onPress={handleSubmit} />
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -83,6 +57,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
     alignItems: 'center',
     paddingTop: 10,
+    height: 770,
   },
   input: {
     height: 40,

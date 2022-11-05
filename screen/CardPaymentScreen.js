@@ -4,6 +4,7 @@ import NumberInput from '../component/NumberInput';
 import PrimaryButton from '../component/PrimaryButton';
 import {instrucText} from '../util/styling';
 import React from 'react';
+import {donationMsg} from '../constants/msg';
 
 const CardDetailScreen = ({navigation, route}) => {
   const {charity, donateAmount} = route.params;
@@ -40,12 +41,13 @@ const CardDetailScreen = ({navigation, route}) => {
     }
   };
   return (
-    <View style={styles.container}>
-      <Text style={instrucText.instrucText}>
-        Your donation amount to {charity.name} is: {donateAmount}
-      </Text>
-      <ScrollView>
-        <View style={{alignItems: 'center'}}>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={instrucText.instrucText}>
+          {donationMsg(charity.name, donateAmount)}
+        </Text>
+
+        <View style={{alignItems: 'center', height: 550}}>
           <NumberInput
             value={cardNum}
             setter={setCardNum}
@@ -75,8 +77,8 @@ const CardDetailScreen = ({navigation, route}) => {
           />
           <PrimaryButton text="Confirm" onPress={handlePayment} />
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -85,7 +87,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 150,
   },
 });
 

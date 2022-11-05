@@ -1,16 +1,22 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import {image} from '../util/styling';
+import {horizontalLine} from '../util/styling';
+import PrimaryButton from '../component/PrimaryButton';
 
 const DetailScreen = ({route, navigation}) => {
   const {charity} = route.params;
   return (
     <View style={styles.container}>
-      <Image
-        style={[image.image, {width: 100, height: 100}]}
-        source={charity.imageUrl}
-      />
-      <Text style={styles.text}>{charity.name}</Text>
+      <View style={[{alignItems: 'center'}, horizontalLine.horizontalLine]}>
+        <Text style={styles.text}>{charity.name}</Text>
+        <PrimaryButton
+          text={'Donate'}
+          onPress={() => {
+            navigation.navigate('donate', {charity: charity});
+          }}
+        />
+      </View>
       <ScrollView>
         <Text style={styles.infoText}>{charity.info}</Text>
       </ScrollView>

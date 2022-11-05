@@ -11,7 +11,7 @@ export const instrucText = {
     alignSelf: 'center',
     padding: 5,
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 25,
     color: 'white',
   },
 };
@@ -28,8 +28,8 @@ export const userSpeech = {
 export const image = {
   image: {
     paddingTop: 40,
-    width: 250,
-    height: 250,
+    width: 300,
+    height: 300,
     borderWidth: 3,
     borderColor: borderColor,
     borderRadius: 8,
@@ -42,5 +42,13 @@ export const infoText = {
     padding: 10,
     fontSize: 30,
     color: 'white',
+  },
+};
+
+import {StyleSheet} from 'react-native';
+export const horizontalLine = {
+  horizontalLine: {
+    borderBottomColor: headerColor,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 };

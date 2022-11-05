@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import PrimaryButton from '../component/PrimaryButton';
 import {instrucText} from '../util/styling';
+import {completedMsg} from '../constants/msg';
 
 const ReceiptScreen = ({navigation, route}) => {
   const handleCompleted = () => {
@@ -10,8 +11,7 @@ const ReceiptScreen = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <Text style={instrucText.instrucText}>
-        Thank you for your {route.params.donateAmount} donation to{' '}
-        {route.params.charity.name}!
+        {completedMsg(route.params.charity.name, route.params.donateAmount)}
       </Text>
       <PrimaryButton text={'Done'} onPress={handleCompleted} />
     </View>

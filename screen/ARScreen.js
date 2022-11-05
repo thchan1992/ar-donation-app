@@ -4,6 +4,7 @@ import {
   ViroARScene,
   ViroARSceneNavigator,
   Viro360Image,
+  ViroAnimations,
 } from '@viro-community/react-viro';
 import ARButton from '../component/ARButton';
 import ARBox from '../component/ARBox';
@@ -19,7 +20,7 @@ const ARScreen = ({navigation}) => {
     const [showButton, setShowButton] = useState([]);
 
     useEffect(() => {
-      var lowEnd = -4;
+      var lowEnd = -6;
       var highEnd = 0;
       var yVal = [];
       while (lowEnd <= highEnd) {
@@ -60,6 +61,14 @@ const ARScreen = ({navigation}) => {
     }, []);
     tracking;
     boxMaterials;
+    ViroAnimations.registerAnimations({
+      rotate: {
+        duration: 2500,
+        properties: {
+          rotateY: '+=90',
+        },
+      },
+    });
 
     const showCharHandler = i => {
       setShowCharity(prev => {

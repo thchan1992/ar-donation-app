@@ -11,6 +11,7 @@ const ARBox = ({clickHandler, materials, position}) => {
       materials={materials}
       onClick={clickHandler}
       position={position}
+      animation={{name: 'rotate', loop: true, run: true}}
     />
   );
 };
