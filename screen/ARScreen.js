@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, Text, Switch} from 'react-native';
 import {
   ViroARScene,
   ViroARSceneNavigator,
@@ -11,15 +11,25 @@ import ARBox from '../component/ARBox';
 import {tracking} from '../util/arTrackingTarget';
 import {boxMaterials} from '../util/boxMaterials';
 import {charityList, beneficiaryList} from '../data/charityData';
-
+import {PrimaryButton} from '../component/PrimaryButton';
+import {
+  headerColor,
+  bgColor,
+  buttonColor,
+  borderColor,
+  instrucText,
+} from '../util/styling';
 const ARScreen = ({navigation}) => {
-  const ARScene = () => {
+  const ARScene = props => {
     const [beneList, setBeneList] = useState([]);
     const [showCharity, setShowCharity] = useState([]);
     const [charityOpt, setCharityOpt] = useState([]);
     const [showButton, setShowButton] = useState([]);
 
+    let data = props.sceneNavigator.viroAppProps;
+
     useEffect(() => {
+      console.log(data.isEnabled, 'xxx');
       var lowEnd = -6;
       var highEnd = 0;
       var yVal = [];
@@ -107,10 +117,12 @@ const ARScreen = ({navigation}) => {
 
     return (
       <ViroARScene>
+        {!data.isEnabled && (
+          <Viro360Image source={require('../assets/background.png')} />
+        )}
         {beneList.map((obj, i) => {
           return (
             <>
-              <Viro360Image source={require('../assets/background.png')} />
               <ARBox
                 key={obj.beneficiary}
                 clickHandler={() => {
@@ -164,6 +176,11 @@ const ARScreen = ({navigation}) => {
     );
   };
 
+  const [isEnabled, setIsEnabled] = useState(true);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+  };
+
   return (
     <View style={{flex: 1}}>
       <ViroARSceneNavigator
@@ -171,8 +188,37 @@ const ARScreen = ({navigation}) => {
         initialScene={{
           scene: ARScene,
         }}
+        viroAppProps={{isEnabled: isEnabled}}
         style={{flex: 1}}
       />
+      <View
+        style={{
+          backgroundColor: headerColor,
+          height: 60,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderWidth: 3,
+          borderRadius: 8,
+          borderColor: '#28C7FA',
+        }}>
+        <View style={{flexDirection: 'row'}}>
+          <Switch
+            style={{padding: 5}}
+            trackColor={{false: borderColor, true: buttonColor}}
+            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+            ios_backgroundColor="#002651"
+            accessibilityRole="button"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+          {!isEnabled && (
+            <Text style={[instrucText.instrucText]}> Real World: Off</Text>
+          )}
+          {isEnabled && (
+            <Text style={[instrucText.instrucText]}> Real World: On</Text>
+          )}
+        </View>
+      </View>
     </View>
   );
 };
