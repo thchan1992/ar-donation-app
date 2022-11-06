@@ -9,7 +9,7 @@ export const borderColor = '#FF304F';
 export const instrucText = {
   instrucText: {
     alignSelf: 'center',
-    // padding: 5,
+    padding: 5,
     fontWeight: 'bold',
     fontSize: 25,
     color: 'white',

@@ -2,9 +2,17 @@ import React from 'react';
 
 import {ViroButton} from '@viro-community/react-viro';
 
-const ARButton = ({position, buttonPic, navDest, paramObj, navigation}) => {
+const ARButton = ({
+  position,
+  buttonPic,
+  navDest,
+  paramObj,
+  navigation,
+  index,
+}) => {
   return (
     <ViroButton
+      key={index}
       source={buttonPic}
       position={position}
       height={0.5}

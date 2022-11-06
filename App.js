@@ -7,6 +7,9 @@ import CardPaymentScreen from './screen/CardPaymentScreen';
 import ReceiptScreen from './screen/ReceiptScreen';
 import DetailScreen from './screen/DetailScreen';
 import {headerColor, bgColor} from './util/styling';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 const Stack = createNativeStackNavigator();
 
 export default () => {
