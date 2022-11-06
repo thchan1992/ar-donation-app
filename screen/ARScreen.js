@@ -5,6 +5,7 @@ import {
   ViroARSceneNavigator,
   Viro360Image,
   ViroAnimations,
+  ViroText,
 } from '@viro-community/react-viro';
 import ARButton from '../component/ARButton';
 import ARBox from '../component/ARBox';
@@ -30,7 +31,7 @@ const ARScreen = ({navigation}) => {
 
     useEffect(() => {
       console.log(data.isEnabled, 'xxx');
-      var lowEnd = -6;
+      var lowEnd = -5;
       var highEnd = 0;
       var yVal = [];
       while (lowEnd <= highEnd) {
@@ -124,20 +125,35 @@ const ARScreen = ({navigation}) => {
           return (
             <>
               <ARBox
-                key={obj.beneficiary}
+                key={i}
                 clickHandler={() => {
                   showCharHandler(i);
                 }}
                 materials={obj.beneficiary}
                 position={[0, obj.y, -4]}
               />
+
+              <ViroText
+                key={i}
+                text={obj.beneficiary}
+                position={[-1, obj.y, -3.8]}
+                // color={headerColor}
+                style={{
+                  alignSelf: 'center',
+                  padding: 5,
+                  fontWeight: 'bold',
+                  fontSize: 25,
+                  color: 'white',
+                }}
+              />
+
               {showCharity[i] === true && (
                 <>
                   {charityOpt[i].map((char, index) => {
                     return (
                       <>
                         <ARBox
-                          key={char.name}
+                          key={index + 100}
                           clickHandler={() => {
                             showOptHandler(i, index);
                           }}
@@ -147,6 +163,7 @@ const ARScreen = ({navigation}) => {
                         {showButton[i][index] === true && (
                           <>
                             <ARButton
+                              key={char.name}
                               position={[index - 1.5, obj.y + 1.2, -4]}
                               buttonPic={require('../assets/donate-button.png')}
                               navDest={'donate'}
@@ -154,6 +171,7 @@ const ARScreen = ({navigation}) => {
                               navigation={navigation}
                             />
                             <ARButton
+                              key={char.name + 'x'}
                               position={[index - 0.5, obj.y + 1.2, -4]}
                               buttonPic={require('../assets/detail-button.png')}
                               navDest={'DetailScreen'}
