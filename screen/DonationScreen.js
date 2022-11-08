@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React, {useState, useContext, useEffect} from 'react';
 import NumberInput from '../component/NumberInput';
@@ -18,11 +19,23 @@ const DonationScreen = ({navigation, route}) => {
   const [donateAmount, setDonateAmount] = useState(null);
   const {charity} = route.params;
 
+  const showAlert = () => {
+    Alert.alert(
+      'Warning',
+      'Please Insert the donation amount, or make sure donation amount is not larger than £1000.',
+      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+    );
+  };
+
   const handleSubmit = () => {
-    navigation.navigate('payment', {
-      charity: charity,
-      donateAmount: donateAmount,
-    });
+    if (donateAmount == null || donateAmount == 0 || donateAmount > 1000) {
+      showAlert();
+    } else {
+      navigation.navigate('payment', {
+        charity: charity,
+        donateAmount: donateAmount,
+      });
+    }
   };
 
   return (

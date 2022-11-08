@@ -71,7 +71,7 @@ export const childrenBrain = {
 
 export const youngLives = {
   name: 'young lives vs cancer',
-  info: "Young Lives vs Cancer is a charity in the United Kingdom formed in 2005. Young Lives vs Cancer is the UK's leading cancer charity for children, young people and their families. Its care teams provide specialist support across the UK.[2] Young Lives vs Cancer supports people from diagnosis onwards and aims to help the whole family deal with the impact of cancer and its treatment, life after treatment and, in some cases, bereavement.",
+  info: "Young Lives vs Cancer is a charity in the United Kingdom formed in 2005. Young Lives vs Cancer is the UK's leading cancer charity for children, young people and their families. Its care teams provide specialist support across the UK. Young Lives vs Cancer supports people from diagnosis onwards and aims to help the whole family deal with the impact of cancer and its treatment, life after treatment and, in some cases, bereavement.",
   imageUrl: require('../assets/youngLives.png'),
   beneficiary: cancerPatient,
   alias: ['young', 'lives', 'cancer'],
