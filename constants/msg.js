@@ -9,7 +9,11 @@ export const charityScreenMsg =
   'Would you like to know the charity detail? Say detail to reveal the charity info, or say donate to process the donation.';
 
 export const getAmountScreenMsg = name => {
-  return 'Please insert the amount you would like to donate to ' + name + '.';
+  return (
+    'Please insert the amount you would like to donate to ' +
+    name +
+    '. Please make sure the amount should not be larger than £1000'
+  );
 };
 
 export const donationMsg = (name, amount) => {
