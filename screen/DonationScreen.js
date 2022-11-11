@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
     alignItems: 'center',
     paddingTop: 10,
-    height: 770,
+    height: 820,
   },
   input: {
     height: 40,
