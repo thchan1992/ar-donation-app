@@ -13,7 +13,11 @@ const ReceiptScreen = ({navigation, route}) => {
       <Text style={instrucText.instrucText}>
         {completedMsg(route.params.charity.name, route.params.donateAmount)}
       </Text>
-      <PrimaryButton text={'Done'} onPress={handleCompleted} />
+      <PrimaryButton
+        testID="doneButton"
+        text={'Done'}
+        onPress={handleCompleted}
+      />
     </View>
   );
 };

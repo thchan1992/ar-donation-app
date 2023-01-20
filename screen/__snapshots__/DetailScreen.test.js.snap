@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailScreen renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "paddingTop": 10,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+        },
+        Object {
+          "borderBottomColor": "#FF304F",
+          "borderBottomWidth": 0.5,
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "white",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "padding": 3,
+          "textTransform": "uppercase",
+        }
+      }
+    >
+      Test Charity
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      nativeID="animatedComponent"
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#28C7FA",
+          "borderColor": "#FF304F",
+          "borderRadius": 8,
+          "borderWidth": 1.5,
+          "height": 70,
+          "margin": 10,
+          "opacity": 1,
+          "width": 150,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "fontSize": 30,
+              "fontWeight": "bold",
+              "padding": 16,
+            },
+            Object {
+              "alignSelf": "center",
+              "fontSize": 30,
+              "fontWeight": "bold",
+              "padding": 16,
+            },
+          ]
+        }
+      >
+        Donate
+      </Text>
+    </View>
+  </View>
+  <RCTScrollView>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 30,
+            "padding": 10,
+          }
+        }
+      >
+        Test charity information.
+      </Text>
+    </View>
+  </RCTScrollView>
+</View>
+`;

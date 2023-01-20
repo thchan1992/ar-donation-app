@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardDetailScreen renders correctly 1`] = `
+<RCTScrollView>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "fontSize": 25,
+            "fontWeight": "bold",
+            "padding": 5,
+          }
+        }
+      >
+        Your donation amount to charity1 is: £10. Please enter your credit card detail below.
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 550,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <TextInput
+            keyboardType="numeric"
+            maxLength={16}
+            onChangeText={[Function]}
+            placeholder="Card Number"
+            placeholderTextColor="grey"
+            style={
+              Array [
+                Object {
+                  "borderColor": "#FF304F",
+                  "borderRadius": 8,
+                  "borderWidth": 1,
+                  "color": "white",
+                  "fontSize": 50,
+                  "margin": 12,
+                  "maxWidth": 200,
+                  "padding": 10,
+                },
+                Object {
+                  "fontSize": 29,
+                  "maxWidth": 300,
+                  "minWidth": 300,
+                },
+              ]
+            }
+            textAlign="center"
+            value={null}
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <TextInput
+            keyboardType="numeric"
+            maxLength={3}
+            onChangeText={[Function]}
+            placeholder="CVV"
+            placeholderTextColor="grey"
+            style={
+              Array [
+                Object {
+                  "borderColor": "#FF304F",
+                  "borderRadius": 8,
+                  "borderWidth": 1,
+                  "color": "white",
+                  "fontSize": 50,
+                  "margin": 12,
+                  "maxWidth": 200,
+                  "padding": 10,
+                },
+                Object {
+                  "fontSize": 29,
+                  "maxWidth": 80,
+                  "minWidth": 80,
+                },
+              ]
+            }
+            textAlign="center"
+            value={null}
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <TextInput
+            keyboardType="numeric"
+            maxLength={5}
+            onChangeText={[Function]}
+            placeholder="EXP DATE"
+            placeholderTextColor="grey"
+            style={
+              Array [
+                Object {
+                  "borderColor": "#FF304F",
+                  "borderRadius": 8,
+                  "borderWidth": 1,
+                  "color": "white",
+                  "fontSize": 50,
+                  "margin": 12,
+                  "maxWidth": 200,
+                  "padding": 10,
+                },
+                Object {
+                  "fontSize": 29,
+                  "maxWidth": 150,
+                  "minWidth": 150,
+                },
+              ]
+            }
+            textAlign="center"
+            value=""
+          />
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#28C7FA",
+              "borderColor": "#FF304F",
+              "borderRadius": 8,
+              "borderWidth": 1.5,
+              "height": 70,
+              "margin": 10,
+              "opacity": 1,
+              "width": 150,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "fontSize": 30,
+                  "fontWeight": "bold",
+                  "padding": 16,
+                },
+                Object {
+                  "alignSelf": "center",
+                  "fontSize": 30,
+                  "fontWeight": "bold",
+                  "padding": 16,
+                },
+              ]
+            }
+          >
+            Confirm
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

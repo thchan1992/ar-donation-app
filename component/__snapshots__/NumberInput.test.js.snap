@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumberInput renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 50,
+        "paddingTop": 20,
+      }
+    }
+  >
+    £
+  </Text>
+  <TextInput
+    keyboardType="numeric"
+    maxLength={5}
+    onChangeText={[MockFunction]}
+    placeholder="Test Placeholder"
+    placeholderTextColor="grey"
+    style={
+      Array [
+        Object {
+          "borderColor": "#FF304F",
+          "borderRadius": 8,
+          "borderWidth": 1,
+          "color": "white",
+          "fontSize": 50,
+          "margin": 12,
+          "maxWidth": 200,
+          "padding": 10,
+        },
+        Object {
+          "fontSize": 50,
+          "maxWidth": 200,
+          "minWidth": 150,
+        },
+      ]
+    }
+    textAlign="center"
+    value="123"
+  />
+</View>
+`;

@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DonationScreen renders correctly 1`] = `
+<RCTScrollView>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "height": 850,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Image
+        source="image.png"
+        style={
+          Object {
+            "borderColor": "#FF304F",
+            "borderRadius": 8,
+            "borderWidth": 3,
+            "height": 300,
+            "padding": 30,
+            "paddingTop": 40,
+            "width": 300,
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "fontSize": 25,
+            "fontWeight": "bold",
+            "padding": 5,
+          }
+        }
+      >
+        Please insert the amount you would like to donate to Test Charity. Please make sure the amount should not be larger than £1000
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 50,
+                "paddingTop": 20,
+              }
+            }
+          >
+            £
+          </Text>
+          <TextInput
+            keyboardType="numeric"
+            maxLength={6}
+            onChangeText={[Function]}
+            placeholder="Amount"
+            placeholderTextColor="grey"
+            style={
+              Array [
+                Object {
+                  "borderColor": "#FF304F",
+                  "borderRadius": 8,
+                  "borderWidth": 1,
+                  "color": "white",
+                  "fontSize": 50,
+                  "margin": 12,
+                  "maxWidth": 200,
+                  "padding": 10,
+                },
+                Object {
+                  "fontSize": 40,
+                  "maxWidth": 160,
+                  "minWidth": 160,
+                },
+              ]
+            }
+            textAlign="center"
+            value={null}
+          />
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#28C7FA",
+              "borderColor": "#FF304F",
+              "borderRadius": 8,
+              "borderWidth": 1.5,
+              "height": 70,
+              "margin": 10,
+              "opacity": 1,
+              "width": 150,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "fontSize": 30,
+                  "fontWeight": "bold",
+                  "padding": 16,
+                },
+                Object {
+                  "alignSelf": "center",
+                  "fontSize": 30,
+                  "fontWeight": "bold",
+                  "padding": 16,
+                },
+              ]
+            }
+          >
+            Donate
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
